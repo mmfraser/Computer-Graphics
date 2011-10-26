@@ -2,7 +2,7 @@
 //
 //	main.cpp - code main functions for main function and GLUT callback functions
 //
-// 	Author: Ewan C. Burns,	Mark M. Fraser
+// 	Author: Ewan C. Burns,	Marc M. Fraser
 //	Date:   04/10/2011
 //
 //	Parts of this code were taken from Professor Mike Chantler's Example_8_3.cpp file
