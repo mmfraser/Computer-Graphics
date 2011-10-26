@@ -1,0 +1,10 @@
+////////////////////////////////////////////////////////////////
+//
+//	drawBackground.h - prototypes of accessible functions contained in the drawBackground.cpp file
+//
+//	Author: Ewan C. Burns,	Mark M. Fraser
+//	Date:   08/10/2011
+//
+////////////////////////////////////////////////////////////////
+
+void drawBackground (void) ;
