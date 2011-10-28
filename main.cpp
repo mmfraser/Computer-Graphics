@@ -170,6 +170,8 @@ void keyboardCallback(unsigned char key, int x, int y)
 		default :		break ;
 	}
 
+	printf("Jaw Rotation: %d \n", jawRotation);
+
 	//Ask for Redisplay
 	glutPostRedisplay() ;
 }

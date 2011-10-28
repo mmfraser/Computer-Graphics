@@ -201,7 +201,7 @@ void drawModel (int jawRotation)
 	glTranslatef(0.f,0.4,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawRearLegsAndBody() ;
 	glPushMatrix();
 	glTranslatef(-1.2, 2.f, 0);
-	drawHead(0);
+	drawHead(jawRotation);
 	glPopMatrix();
 
 	//Pop Matrix from function call
