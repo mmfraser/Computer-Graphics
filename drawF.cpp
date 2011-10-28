@@ -28,7 +28,7 @@ void drawF (int origin)
 	glPopMatrix() ;			glPushMatrix() ;
 
 	//Tranformations for the first cube
-	glTranslatef(0.05,0.2,0.f) ;	/*glRotatef(,,,) ;*/		glScalef(2.f,0.75,1.f) ;		cube() ;
+	glTranslatef(0.05,0.2,0.f) ;	/*glRotatef(,,,) ;*/		glScalef(1.f,0.75,1.f) ;		cube() ;
 
 	//Restaure Matrix to function call, and save
 	glPopMatrix() ;			glPushMatrix() ;

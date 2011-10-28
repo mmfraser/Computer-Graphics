@@ -2,7 +2,7 @@
 //
 //	defineAndDrawScene.cpp - code for drawing the different elements of the scene
 //
-//	Author: Ewan C. Burns,	Mark M. Fraser
+//	Author: Ewan C. Burns,	Marc M. Fraser
 //	Date:   04/10/2011
 //
 ////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@
 //===================================================================================================================================
 
 //--------------------------------------------------------------------------------------------------------------------- main function
-void drawScene (void)
+void drawScene (int jawRotation)
 {
 	//Set camera
 	glMatrixMode(GL_PROJECTION) ;
@@ -40,7 +40,7 @@ void drawScene (void)
 	drawBackground() ;
 
 	//Draw Model
-	drawModel() ;
+	drawModel(jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
@@ -102,12 +102,12 @@ void drawAllInitials (void)
 //					DEFINE THE SCENE TO DRAW
 //===================================================================================================================================
 
-void defineAndDrawScene (int scene, int origin)
+void defineAndDrawScene (int scene, int origin, int jawRotation)
 {
 	//Define the scene to be drawn, and draw
 	switch (scene)
 	{
-		case 0 : drawScene() ;		break ;
+		case 0 : drawScene(jawRotation) ;		break ;
 		case 1 : drawE(origin) ;	break ;
 		case 2 : drawC(origin) ;	break ;
 		case 3 : drawB(origin) ;	break ;

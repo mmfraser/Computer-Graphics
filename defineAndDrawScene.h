@@ -7,4 +7,4 @@
 //
 ////////////////////////////////////////////////////////////////
 
-void defineAndDrawScene (int, int) ;
+void defineAndDrawScene (int, int, int jawRotation) ;
