@@ -9,16 +9,20 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Includes for glut
-#include <GL/glut.h>
+// Windows only
+#include "stdafx.h"
 
 //Standard Includes
 #include <stdio.h>
 #include <stdlib.h>
 
+//Includes for glut
+#include <GL/glut.h>
+
 //Personnel header files
 #include "defineAndDrawScene.h"
 #include "initials.h"
+
 
 //===================================================================================================================================
 //					GLOBAL VARIABLES
