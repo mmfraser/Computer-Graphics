@@ -9,16 +9,20 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Includes for glut
-#include <GL/glut.h>
+// Windows only
+//#include "stdafx.h"
 
 //Standard Includes
 #include <stdio.h>
 #include <stdlib.h>
 
+//Includes for glut
+#include <GL/glut.h>
+
 //Personnel header files
 #include "defineAndDrawScene.h"
 #include "initials.h"
+
 
 //===================================================================================================================================
 //					GLOBAL VARIABLES
@@ -41,7 +45,8 @@ int x_y_display = 0, y_z_display = 0, x_z_display = 0 ;
 float pitch0, yaw0 ;
 int mouseX0, mouseY0 ;
 
-int scene = 0, back = 0, origin = 0 ;
+int scene = 0, back = 0, origin = 0, jawRotation = 0;
+
 
 //===================================================================================================================================
 //					OTHER FUNCTIONS
@@ -160,8 +165,12 @@ void keyboardCallback(unsigned char key, int x, int y)
 		case 'x' : x_y_display++ ;	if(x_y_display > 1)	x_y_display=0; 	break ;
 		case 'y' : y_z_display++ ;	if(y_z_display > 1)	y_z_display=0;	break ;
 		case 'z' : x_z_display++ ;	if(x_z_display > 1)	x_z_display=0;	break ;
+		case 'j' : if(jawRotation < 20) jawRotation++; break;
+		case 'J' : if(jawRotation > 0) jawRotation--; break;
 		default :		break ;
 	}
+
+	printf("Jaw Rotation: %d \n", jawRotation);
 
 	//Ask for Redisplay
 	glutPostRedisplay() ;
@@ -231,7 +240,7 @@ void displayCallback()
 	if(back)	drawAxesAndGridLines() ;
 
 	//Draw the Scene
-	defineAndDrawScene(scene,origin) ;
+	defineAndDrawScene(scene, origin, jawRotation);
 
 	glutSwapBuffers() ;
 }
@@ -246,7 +255,7 @@ int main(int argc, char** argv)
 	glutInit(&argc,argv) ;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH) ;
 	glutInitWindowSize(height,width) ;
-	mainWindow = glutCreateWindow("Computer Graphics project : first view of initials") ;
+	glutCreateWindow("Computer Graphics project : first view of initials") ;
 	glEnable(GL_DEPTH_TEST) ;
 	glClearColor(0.f,0.f,0.f,1.f) ;
 
