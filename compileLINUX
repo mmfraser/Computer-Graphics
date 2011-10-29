@@ -1,0 +1,1 @@
+g++ 3DCurve.cpp cube.cpp defineAndDrawScene.cpp drawBackground.cpp drawB.cpp drawC.cpp drawE.cpp drawF.cpp drawM.cpp drawModel.cpp drawN.cpp main.cpp -o runInitialsLINUX -lGL -lGLU -lglut -lm
