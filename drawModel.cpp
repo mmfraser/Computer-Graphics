@@ -153,7 +153,7 @@ void drawRearLegsAndBody (void)
 //------------------------------------------------------------------------ draw head function
 
 
-void drawTopOfHeadAndNose(void) 
+void drawTopOfHeadAndNose(void)
 {
 	glPushMatrix();
 		glRotatef(180.f, 1.f, 0.f ,0.f);
@@ -177,7 +177,7 @@ void drawJaw(int r) {
 
 		if(r > 20)
 			r = 20;
-		if(r < 0) 
+		if(r < 0)
 			r = 0;
 
 		glRotatef(r, 0, 0, 1);
@@ -187,7 +187,7 @@ void drawJaw(int r) {
 }
 
 
-void drawHead(int jawRotation) 
+void drawHead(int jawRotation)
 {
 	glPushMatrix();
 		glTranslatef(0, .5, 0);
@@ -207,8 +207,7 @@ void drawModel (int jawRotation)
 	//Save Matrix from function call
 	glPushMatrix() ;
 
-	
-	//Transformations and raw rear legs and body
+	//Transformations and rear legs and body
 	glTranslatef(0.f,0.4,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawRearLegsAndBody() ;
 	glPushMatrix();
 	glTranslatef(-1.2, 2.f, 0);
