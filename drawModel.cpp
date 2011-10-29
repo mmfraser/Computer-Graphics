@@ -14,6 +14,13 @@
 #include "initials.h"
 
 //===================================================================================================================================
+//					GLOBAL VARIABLES
+//===================================================================================================================================
+
+//----------------------------------------------------------------------------------------------------------------------- tail angles
+float angles[7] = {20.f,15.f,0.f,0.f,0.f,0.f,0.f} ;
+
+//===================================================================================================================================
 //					MULTIPLE USE FUNCTIONS
 //===================================================================================================================================
 
@@ -67,13 +74,17 @@ void drawTail (void)
 	//Save Matrix from function call
 	glPushMatrix() ;
 
-	//Transformation, and and draw components
-	glTranslatef(0.25,0.2,0.f) ;	glRotatef(180.f,0.f,1.f,0.f) ;	glRotatef(180.f,0.f,0.f,1.f) ;	glScalef(1.f,0.75,1.f) ;
+	//Transformation, save, and draw components
+	glTranslatef(0.18,0.5,0.f) ;	glRotatef(180.f,0.f,1.f,0.f) ;	glRotatef(145.f,0.f,0.f,1.f) ; glPushMatrix() ;
+	glScalef(1.f,0.375,0.f) ;	drawF(0) ;	glPopMatrix() ;
+
+	for(int i = 0; i < 7; i++)
+	{
+		glTranslatef(0.f,0.3*0.375,0.f) ;	glRotatef(angles[i],0.f,0.f,1.f) ;
+		glPushMatrix() ;	glScalef(1.f,0.375,0.f) ;	drawF(0) ;	glPopMatrix() ;
+	}
 
 	//Draw tail components
-	drawF(0) ;
-
-	//Pop Matrix from function call
 	glPopMatrix() ;
 }
 
