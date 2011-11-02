@@ -54,6 +54,11 @@ void drawTopOfHeadAndNose(void)
 	glRotatef(180.f,1.f,0.f,0.f) ;	glRotatef(75.f,0.f,0.f,1.f) ;
 	glPushMatrix() ;	glScalef(1.f,0.75,3.f) ;	drawC(0) ;	glPopMatrix() ;
 
+	//Transformations, and draw ears
+	
+	glPushMatrix(); glTranslatef(-0.3, 0, -0.05); glRotatef(120.f, 0.f, 0.f, 1.f); glScalef(0.25, 0.3, 1);  drawN(0); glPopMatrix();
+	glPushMatrix(); glTranslatef(-0.3, 0, 0.05); glRotatef(120.f, 0.f, 0.f, 1.f); glScalef(0.25, 0.3, 1);  drawN(0); glPopMatrix();
+
 	//Transformations, and draw nose 
 	glTranslatef(-0.125,0.25,0.f) ;	glRotatef(5.f,0.f,0.f,1.f) ;
 	glPushMatrix() ;	glScalef(1.f,0.75,3.f) ;	drawN(0) ;	glPopMatrix() ;
