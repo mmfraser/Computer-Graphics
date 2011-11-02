@@ -13,6 +13,9 @@
 //Include for maths functions
 #include <math.h>
 
+//Includes for initials
+#include "initials.h"
+
 #define PI 3.14159264
 
 //------------------------------------------------------------------------------------------------------------ draw cylinder function
@@ -39,13 +42,46 @@ void drawCylinder (float width, float height)
 }
 
 //---------------------------------------------------------------------------------------------------------------- draw tree function
+void drawTreeBranches (void)
+{
+	//Save Matrix from function call
+	glPushMatrix() ;
+
+	//Draw trunk
+	glColor3f(0.6,0.3,0.1) ;	drawCylinder(0.1,3.f) ;
+
+	//Save matrix
+	glPushMatrix();
+
+		//Translate to position of branches and scale
+		glTranslatef(0.f, 2.2, 0.f); glScalef(3.f, 3.f, 3.f);
+
+		//Draw 360 branches
+		for(int x = 0; x < 180; x++)
+		{
+			//Rotate branch and draw
+			glRotatef(2, 0.f, 1.f, 0.f);
+			drawB(0);
+		}
+
+	//Pop matrix for branch draw
+	glPopMatrix();
+
+	//Pop Matrix from function call
+	glPopMatrix() ;
+}
+
+//---------------------------------------------------------------------------------------------------------------- draw tree function
 void drawTree (void)
 {
 	//Save Matrix from function call
 	glPushMatrix() ;
 
-	//Draw trunc
+	//Draw trunk
 	glColor3f(0.6,0.3,0.1) ;	drawCylinder(0.1,3.f) ;
+
+	//Draw 'branches'
+	drawTreeBranches();
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
