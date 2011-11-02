@@ -33,19 +33,16 @@ void drawJaw(int r)
 {
 	//Save Matrix from function call
 	glPushMatrix() ;
-
-	//Calculate rotation
-	if(r > 20)	r = 20 ;
-	if(r < 0)	r = 0 ;
 	
 	//Transformations, and draw jaw
-	glTranslatef(0.2,0.f,0.f) ;	glRotatef(180.f,1.f,0.f,0.F) ;	glRotatef(195.f+r,0.f,0.f,1.f) ;	glScalef(1.f,0.65,3.f) ;	drawF(0) ;
+	glTranslatef(0.2,0.f,0.f) ;	glRotatef(180.f,1.f,0.f,0.f) ;	glRotatef(195.f+r,0.f,0.f,1.f) ;	glScalef(1.f,0.65,3.f) ;	
+drawF(0) ;
 
 	//Pop Matrix from function call
 	glPopMatrix();
 }
 
-void drawTopOfHeadAndNose(void)
+void drawTopOfHeadAndNose(int jawRotation)
 {
 	//Save Matrix from function call
 	glPushMatrix() ;
@@ -59,7 +56,7 @@ void drawTopOfHeadAndNose(void)
 	glPushMatrix() ;	glScalef(1.f,0.75,3.f) ;	drawN(0) ;	glPopMatrix() ;
 
 	//Draw Jaw
-	drawJaw(0) ;
+	drawJaw(jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix();
@@ -99,7 +96,7 @@ void drawTail (void)
 }
 
 //--------------------------------------------------- draw top of legs and front legs function
-void drawTopOfAndFrontLeg (int side)
+void drawTopOfAndFrontLeg (int side, int kneeRotation)
 {
 	//Save Matrix on function call
 	glPushMatrix() ;
@@ -123,7 +120,7 @@ void drawTopOfAndFrontLeg (int side)
 	glPopMatrix () ;	glPushMatrix() ;
 
 	//Transformation and draw leg
-	glTranslatef(-0.7,0.f,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,) ;*/	drawLeg(side) ;
+	glTranslatef(-0.7,0.f,0.f) ;	glRotatef(kneeRotation,0.f,0.f,1.f) ;	/*glScalef(,,) ;*/	drawLeg(side) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
@@ -140,27 +137,25 @@ void drawHead(int jawRotation)
 	glPushMatrix();
 
 	//Transformations, and draw top of head and nose
-	glRotatef(180.f,0.f,1.f,0.f) ;	drawTopOfHeadAndNose();
+	glRotatef(180.f,0.f,1.f,0.f) ;	drawTopOfHeadAndNose(jawRotation);
 
 	//Pop Matrix from function call
 	glPopMatrix();
 }
 
 //---------------------------------------------------------------- draw neck and head function
-void drawNeckAndHead (void)
+void drawNeckAndHead (int kneeRotation, int jawRotation)
 {
 	//Save function from function call
 	glPushMatrix() ;
 
 	//Transfromations, and draw base of neck
-	glTranslatef(-0.5,0.3,0.f) ;	glRotatef(40.f,0.f,0.f,1.f) ;	glPushMatrix() ;	glScalef(1.5,0.5,5.f) ;	drawM(0) ; glPopMatrix() ;
-	glTranslatef(0.f,0.2,0.f) ;	glRotatef(-15.f,0.f,0.f,1.f) ;	glPushMatrix() ;	glScalef(1.25/1.5,0.5,4.f) ;	drawM(0) ;	glPopMatrix() ;
-
-	//Pop Matrix from function call
-	glPopMatrix() ;	
+	glTranslatef(-0.5,0.3,0.f) ;	glRotatef(40.f,0.f,0.f,1.f) ;	glPushMatrix() ;	glScalef(1.5,0.5,5.f) ;	drawM(0) ; glPopMatrix()  ;
+	glTranslatef(0.f,0.2,0.f) ;	glRotatef(-15.f+kneeRotation,0.f,0.f,1.f) ;	glPushMatrix() ;	glScalef(1.25/1.5,0.5,4.f) ;	
+drawM(0) ;	glPopMatrix() ;
 
 	//Transformations for trunc of neck
-	glTranslatef(-0.55,0.7,0.f) ;	glRotatef(180.f,0.f,1.f,0.f) ;	
+	glTranslatef(0.1625,0.175,0.f) ;	glRotatef(180.f,0.f,1.f,0.f) ;	glRotatef(25.f,0.f,0.f,1.f) ;
 	for(int i = 0; i < 5; i++)
 	{
 		glRotatef(neckAngles[i],0.f,0.f,1.f) ;	glPushMatrix() ;
@@ -169,14 +164,14 @@ void drawNeckAndHead (void)
 	}
 
 	//Draw head
-	drawHead(0) ;
+	drawHead(jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
 }
 
 //---------------------------------------------------------- draw body and front legs function
-void drawBody (void)
+void drawBody (int kneeRotation, int jawRotation)
 {
 	//Save function from function call
 	glPushMatrix() ;
@@ -191,33 +186,33 @@ void drawBody (void)
 	drawTail() ;
 
 	//Draw Neck and head
-	drawNeckAndHead() ;
+	drawNeckAndHead(kneeRotation,jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
 }
 
 //---------------------------------------------------------- draw body and front legs function
-void drawFrontLegsAndBody (void)
+void drawFrontLegsAndBody (int kneeRotation, int jawRotation)
 {
 	//Push Matrix from function call
 	glPushMatrix() ;
 
 	//Draw left leg
-	drawTopOfAndFrontLeg(1) ;
+	drawTopOfAndFrontLeg(1,kneeRotation) ;
 
 	//Draw right leg
-	drawTopOfAndFrontLeg(-1) ;
+	drawTopOfAndFrontLeg(-1,kneeRotation) ;
 
 	//Draw body
-	glTranslatef(-0.2,0.3,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,) ;*/	drawBody() ;
+	glTranslatef(-0.2,0.3,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,) ;*/	drawBody(kneeRotation,jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
 }
 
 //-------------------------------------------------------------------- draw rear legs function
-void drawRearLegsAndBody (void)
+void drawRearLegsAndBody (int kneeRotation, int jawRotation)
 {
 	//Push Matrix from function call
 	glPushMatrix() ;
@@ -229,20 +224,20 @@ void drawRearLegsAndBody (void)
 	drawLeg(-1) ;
 
 	//Draw top of legs
-	drawFrontLegsAndBody() ;
+	glRotatef(-kneeRotation,0.f,0.f,1.f) ;	drawFrontLegsAndBody(kneeRotation,jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
 }
 
 //------------------------------------------------------------------------ draw Model function
-void drawModel (int jawRotation)
+void drawModel (int kneeRotation, int jawRotation)
 {
 	//Save Matrix from function call
 	glPushMatrix() ;
 
 	//Transformations and rear legs and body
-	glTranslatef(0.f,0.4,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawRearLegsAndBody() ;
+	glTranslatef(0.f,0.4,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawRearLegsAndBody(kneeRotation,jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;

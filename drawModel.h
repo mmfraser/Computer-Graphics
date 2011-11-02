@@ -7,4 +7,10 @@
 //
 ////////////////////////////////////////////////////////////////
 
-void drawModel (int jawRotation) ;
+/**************************************************************
+List of varibles for the drawModel function, from first to last
+	- kneeRotation
+	- jawRotation
+***************************************************************/
+
+void drawModel (int, int) ;

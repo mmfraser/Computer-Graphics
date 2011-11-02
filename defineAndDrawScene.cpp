@@ -22,7 +22,7 @@
 //===================================================================================================================================
 
 //--------------------------------------------------------------------------------------------------------------------- main function
-void drawScene (int jawRotation)
+void drawScene (int kneeRotation, int jawRotation)
 {
 	//Set camera
 	glMatrixMode(GL_PROJECTION) ;
@@ -40,7 +40,7 @@ void drawScene (int jawRotation)
 	drawBackground() ;
 
 	//Draw Model
-	drawModel(jawRotation) ;
+	drawModel(kneeRotation, jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
@@ -102,12 +102,12 @@ void drawAllInitials (void)
 //					DEFINE THE SCENE TO DRAW
 //===================================================================================================================================
 
-void defineAndDrawScene (int scene, int origin, int jawRotation)
+void defineAndDrawScene (int scene, int origin, int kneeRotation, int jawRotation)
 {
 	//Define the scene to be drawn, and draw
 	switch (scene)
 	{
-		case 0 : drawScene(jawRotation) ;		break ;
+		case 0 : drawScene(kneeRotation,jawRotation) ;		break ;
 		case 1 : drawE(origin) ;	break ;
 		case 2 : drawC(origin) ;	break ;
 		case 3 : drawB(origin) ;	break ;

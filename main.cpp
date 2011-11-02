@@ -48,7 +48,10 @@ int x_y_display = 0, y_z_display = 0, x_z_display = 0 ;
 float pitch0, yaw0 ;
 int mouseX0, mouseY0 ;
 
-int scene = 0, back = 0, origin = 0, jawRotation = 0;
+int scene = 0, back = 0, origin = 0 ;
+
+//------------------------------------------------------------------------------------------------------------ model motion variables
+int jawRotation = 0, kneeRotation = 0 ;
 
 
 //===================================================================================================================================
@@ -168,12 +171,14 @@ void keyboardCallback(unsigned char key, int x, int y)
 		case 'x' : x_y_display++ ;	if(x_y_display > 1)	x_y_display=0; 	break ;
 		case 'y' : y_z_display++ ;	if(y_z_display > 1)	y_z_display=0;	break ;
 		case 'z' : x_z_display++ ;	if(x_z_display > 1)	x_z_display=0;	break ;
-		case 'j' : if(jawRotation < 20) jawRotation++; break;
-		case 'J' : if(jawRotation > 0) jawRotation--; break;
+		case 'j' : if(jawRotation < 20)	jawRotation++;				break ;
+		case 'J' : if(jawRotation > 0)	jawRotation--;				break ;
+		case 'k' : if(kneeRotation < 45)	kneeRotation++ ;			break ;
+		case 'K' : if(kneeRotation > 0)		kneeRotation-- ;			break ;
 		default :		break ;
 	}
 
-	//printf("Jaw Rotation: %d \n", jawRotation);
+	//printf("Knee Rotation : %d\tJaw Rotation: %d \n", kneeRotation, jawRotation);
 
 	//Ask for Redisplay
 	glutPostRedisplay() ;
@@ -243,7 +248,7 @@ void displayCallback()
 	if(back)	drawAxesAndGridLines() ;
 
 	//Draw the Scene
-	defineAndDrawScene(scene, origin, jawRotation);
+	defineAndDrawScene(scene, origin, kneeRotation, jawRotation) ;
 
 	glutSwapBuffers() ;
 }
