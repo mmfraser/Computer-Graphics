@@ -10,7 +10,9 @@
 /**************************************************************
 List of varibles for the drawModel function, from first to last
 	- kneeRotation
+	- tailFlick
+	- neckTilt
 	- jawRotation
 ***************************************************************/
 
-void drawModel (int, int) ;
+void drawModel (int, float*, int, int) ;

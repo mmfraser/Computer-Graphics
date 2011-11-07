@@ -7,4 +7,4 @@
 //
 ////////////////////////////////////////////////////////////////
 
-void defineAndDrawScene (int, int, int, int) ;
+void defineAndDrawScene (int, int, int, float*,int, int) ;

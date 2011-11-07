@@ -16,6 +16,7 @@
 //Includes for initials
 #include "initials.h"
 
+//Define PI
 #define PI 3.14159264
 
 //------------------------------------------------------------------------------------------------------------ draw cylinder function
@@ -34,7 +35,7 @@ void drawCylinder (float width, float height)
 		{
 			glVertex3f(cos(2*i*PI/40),0.f,sin(2*i*PI/40)) ;	glVertex3f(cos(2*i*PI/40),height,sin(2*i*PI/40)) ;
 		}
-		
+
 	glEnd() ;
 
 	//Pop Matrix from function call
@@ -64,8 +65,8 @@ void drawTreeBranches (void)
 			drawB(0);
 		}
 
-	//Pop matrix for branch draw
-	glPopMatrix();
+	//Pop matrix from branch draw
+	glPopMatrix() ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
@@ -123,7 +124,7 @@ void drawBackground (void)
 	drawFloor() ;	drawBack() ;
 
 	//Transformations and draw Tree
-	glTranslatef(-2.5,0.f,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawTree() ;
+	glTranslatef(-2.f,0.f,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawTree() ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;

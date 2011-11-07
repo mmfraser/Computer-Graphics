@@ -18,6 +18,7 @@
 //Standard Includes
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 //Includes for glut
 #include <GL/glut.h>
@@ -26,6 +27,8 @@
 #include "defineAndDrawScene.h"
 #include "initials.h"
 
+//Define PI
+#define PI 3.14159264
 
 //===================================================================================================================================
 //					GLOBAL VARIABLES
@@ -51,8 +54,9 @@ int mouseX0, mouseY0 ;
 int scene = 0, back = 0, origin = 0 ;
 
 //------------------------------------------------------------------------------------------------------------ model motion variables
-int jawRotation = 0, kneeRotation = 0 ;
-
+int jawRotation = 0, kneeRotation = 0, neckTilt = 0 ;
+int counter = 0 ;
+float tailFlick[8] = {	0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f	} ;
 
 //===================================================================================================================================
 //					OTHER FUNCTIONS
@@ -171,16 +175,18 @@ void keyboardCallback(unsigned char key, int x, int y)
 		case 'x' : x_y_display++ ;	if(x_y_display > 1)	x_y_display=0; 	break ;
 		case 'y' : y_z_display++ ;	if(y_z_display > 1)	y_z_display=0;	break ;
 		case 'z' : x_z_display++ ;	if(x_z_display > 1)	x_z_display=0;	break ;
-		case 'j' : if(jawRotation < 20)	jawRotation++;				break ;
-		case 'J' : if(jawRotation > 0)	jawRotation--;				break ;
-		case 'k' : if(kneeRotation < 45)	kneeRotation++ ;			break ;
-		case 'K' : if(kneeRotation > 0)		kneeRotation-- ;			break ;
+		case 'j' : if(jawRotation < 20)	jawRotation++ ;			break ;
+		case 'J' : if(jawRotation > 0)	jawRotation-- ;			break ;
+		case 'k' : if(kneeRotation < 45)	kneeRotation++ ;	break ;
+		case 'K' : if(kneeRotation > 0)		kneeRotation-- ;	break ;
+		case 'h' : if(neckTilt < 45)	neckTilt++ ;			break ;
+		case 'H' : if(neckTilt > 0)	neckTilt-- ;			break ;
 		default :		break ;
 	}
 
 	//printf("Knee Rotation : %d\tJaw Rotation: %d \n", kneeRotation, jawRotation);
 
-	//Ask for Redisplay
+	//Ask for redisplay
 	glutPostRedisplay() ;
 }
 
@@ -190,6 +196,8 @@ void mouseMotionCallback(int x, int y)
 	//Called when the Mouse is moved with left button down
 	G_theta[0] = pitch0 + (y - mouseY0) ;
 	G_theta[1] = yaw0 + (x - mouseX0) ;
+
+	//Ask for redislay
 	glutPostRedisplay() ;
 }
 
@@ -222,12 +230,18 @@ void mouseClickCallback(int btn, int state, int x, int y)
 //------------------------------------------------------------------------------------------------------------ idle callback function
 void idleCallback()
 {
-
+	//Ask for redisplay
+	glutPostRedisplay() ;
 }
 
 //--------------------------------------------------------------------------------------------------------- display callback function
 void displayCallback()
 {
+	//Define tail flick angle
+	for(int i = 6; i >= 0; i--) tailFlick[i+1] = tailFlick[i] ;
+	tailFlick[0] = 45*cos(2*PI*counter/50) ;
+	counter++ ; counter%=50 ;
+
 	//Set Drawing Mode
 	glMatrixMode(GL_MODELVIEW) ;
 	glLoadIdentity() ;
@@ -248,8 +262,9 @@ void displayCallback()
 	if(back)	drawAxesAndGridLines() ;
 
 	//Draw the Scene
-	defineAndDrawScene(scene, origin, kneeRotation, jawRotation) ;
+	defineAndDrawScene(scene, origin, kneeRotation, tailFlick,neckTilt, jawRotation) ;
 
+	//Switch buffers to show new image
 	glutSwapBuffers() ;
 }
 
@@ -271,7 +286,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouseClickCallback) ;
 	glutKeyboardFunc(keyboardCallback) ;
 	glutMotionFunc(mouseMotionCallback) ;
-	//glutIdleFunc(idleCallback) ;
+	glutIdleFunc(idleCallback) ;
 	glutDisplayFunc(displayCallback) ;
 	glutReshapeFunc(reshapeCallback) ;
 
