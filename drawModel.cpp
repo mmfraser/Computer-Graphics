@@ -2,7 +2,7 @@
 //
 //	drawModel.cpp - code for drawing the different elements of the model
 //
-//	Author: Ewan C. Burns,	Mark M. Fraser
+//	Author: Ewan C. Burns,	Marc M. Fraser
 //	Date:   08/10/2011
 //
 ////////////////////////////////////////////////////////////////

@@ -53,6 +53,8 @@ int mouseX0, mouseY0 ;
 
 int scene = 0, back = 0, origin = 0 ;
 
+int stepDraw = 0;
+
 //------------------------------------------------------------------------------------------------------------ model motion variables
 int jawRotation = 0, kneeRotation = 0, neckTilt = 0 ;
 int counter = 0 ;
@@ -181,9 +183,12 @@ void keyboardCallback(unsigned char key, int x, int y)
 		case 'K' : if(kneeRotation > 0)		kneeRotation-- ;	break ;
 		case 'h' : if(neckTilt < 45)	neckTilt++ ;			break ;
 		case 'H' : if(neckTilt > 0)	neckTilt-- ;			break ;
+		case '/' : if(scene == 14) scene = 0; else scene++; break;
 		default :		break ;
 	}
 
+	printf("Scene: %d", scene);
+	
 	//printf("Knee Rotation : %d\tJaw Rotation: %d \n", kneeRotation, jawRotation);
 
 	//Ask for redisplay
@@ -230,6 +235,11 @@ void mouseClickCallback(int btn, int state, int x, int y)
 //------------------------------------------------------------------------------------------------------------ idle callback function
 void idleCallback()
 {
+	//Define tail flick angle
+	for(int i = 6; i >= 0; i--) tailFlick[i+1] = tailFlick[i] ;
+	tailFlick[0] = 45*cos(2*PI*counter/50) ;
+	counter++ ; counter%=50 ;
+
 	//Ask for redisplay
 	glutPostRedisplay() ;
 }
@@ -237,10 +247,7 @@ void idleCallback()
 //--------------------------------------------------------------------------------------------------------- display callback function
 void displayCallback()
 {
-	//Define tail flick angle
-	for(int i = 6; i >= 0; i--) tailFlick[i+1] = tailFlick[i] ;
-	tailFlick[0] = 45*cos(2*PI*counter/50) ;
-	counter++ ; counter%=50 ;
+	
 
 	//Set Drawing Mode
 	glMatrixMode(GL_MODELVIEW) ;

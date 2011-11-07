@@ -15,4 +15,11 @@ List of varibles for the drawModel function, from first to last
 	- jawRotation
 ***************************************************************/
 
-void drawModel (int, float*, int, int) ;
+void drawModel (int kneeRotation, float* tailFlick, int neckTilt, int jawRotation) ;
+void drawJaw (int jawRotation) ;
+void drawTopOfHeadAndNose(int jawRotation) ;
+void drawHead(int neckTilt, int jawRotation) ;
+void drawNeckAndHead (int kneeRotation, int neckTilt, int jawRotation) ;
+void drawTail (int kneeRotation, float* tailFlick) ;
+void drawBody (int kneeRotation, float* tailFlick, int neckTilt, int jawRotation) ;
+void drawFrontLegsAndBody (int kneeRotation, float* tailFlick, int neckTilt, int jawRotation) ;
