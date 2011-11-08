@@ -107,20 +107,20 @@ void defineAndDrawScene (int scene, int origin, int kneeRotation, float* tailFli
 	//Define the scene to be drawn, and draw
 	switch (scene)
 	{
-		case 0 : drawScene(kneeRotation, tailFlick, neckTilt, jawRotation) ;		break ;
-		case 1 : drawE(origin) ;	break ;
-		case 2 : drawC(origin) ;	break ;
-		case 3 : drawB(origin) ;	break ;
-		case 4 : drawM(origin) ;	break ;
-		case 5 : drawN(origin) ;	break ;
-		case 6 : drawF(origin) ;	break ;
-		case 7 : drawAllInitials() ;	break ;
-		case 8 : drawJaw(jawRotation) ; break ; 
-		case 9 : drawTopOfHeadAndNose(jawRotation) ; break ; 
-		case 10 : drawNeckAndHead(kneeRotation, neckTilt, jawRotation); break ;
-		//case 11 : drawTail(kneeRotation, tailFlick) ;
-		case 12 : drawBody (kneeRotation, tailFlick, neckTilt, jawRotation);
-		case 13 : drawFrontLegsAndBody (kneeRotation, tailFlick, neckTilt, jawRotation) ;
-		default :		break ;
+		case 0 : drawScene(kneeRotation, tailFlick, neckTilt, jawRotation) ;			break ;
+		case 1 : drawE(origin) ;								break ;
+		case 2 : drawC(origin) ;								break ;
+		case 3 : drawB(origin) ;								break ;
+		case 4 : drawM(origin) ;								break ;
+		case 5 : drawN(origin) ;								break ;
+		case 6 : drawF(origin) ;								break ;
+		case 7 : drawAllInitials() ;								break ;
+		case 8 : drawJaw(jawRotation) ; 							break ;
+		case 9 : drawTopOfHeadAndNose(jawRotation) ;						break ;
+		case 10 : drawNeckAndHead(kneeRotation, neckTilt, jawRotation) ;			break ;
+		case 11 : drawTail(kneeRotation, tailFlick) ;						break ;
+		case 12 : drawBody (kneeRotation, tailFlick, neckTilt, jawRotation) 	;		break ;
+		case 13 : drawFrontLegsAndBody (kneeRotation, tailFlick, neckTilt, jawRotation) ;	break ;
+		default :										break ;
 	}
 }

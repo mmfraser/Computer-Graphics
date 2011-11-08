@@ -27,6 +27,9 @@
 #include "defineAndDrawScene.h"
 #include "initials.h"
 
+//Prototype for idlePlayCallback
+void idlePlayCallback (void) ;
+
 //Define PI
 #define PI 3.14159264
 
@@ -47,17 +50,16 @@ bool MousePressed ;
 static float G_theta[3] ;
 
 int x_y_display = 0, y_z_display = 0, x_z_display = 0 ;
-
 float pitch0, yaw0 ;
 int mouseX0, mouseY0 ;
-
 int scene = 0, back = 0, origin = 0 ;
-
-int stepDraw = 0;
+int stepDraw = 0 ;
+int play = 0 ;
 
 //------------------------------------------------------------------------------------------------------------ model motion variables
 int jawRotation = 0, kneeRotation = 0, neckTilt = 0 ;
-int counter = 0 ;
+int counterTail = 0 ;
+int counterJaw = 0 ;
 float tailFlick[8] = {	0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f	} ;
 
 //===================================================================================================================================
@@ -157,39 +159,64 @@ void reshapeCallback(int w, int h)
 //-------------------------------------------------------------------------------------------------------- keyboard callback function
 void keyboardCallback(unsigned char key, int x, int y)
 {
+	//Pressed key
+	printf("Pressed key %c.\n", key) ;
+
 	//Read key touch
 	switch (key)
 	{
-		case 27 : exit(0) ;
-		case 's' : scene = 0 ;	break ;
-		case 'e' : scene = 1 ;	break ;
-		case 'c' : scene = 2 ;	break ;
-		case 'b' : scene = 3 ;	break ;
-		case 'm' : scene = 4 ;	break ;
-		case 'n' : scene = 5 ;	break ;
-		case 'f' : scene = 6 ;	break ;
-		case 'i' : scene = 7 ;	break ;
-		case 'p' : scene++ ;		if(scene > 7)		scene = 0 ;	break ;
-		case 'o' : origin++ ;		if(origin > 1)		origin = 0 ;	break ;
-		case 'a' : back++ ;		if(back > 1)		back = 0 ;	break ;
-		case 'l' : glPolygonMode(GL_FRONT_AND_BACK,GL_LINE) ;			break ;
-		case 'L' : glPolygonMode(GL_FRONT,GL_FILL) ;				break ;
-		case 'x' : x_y_display++ ;	if(x_y_display > 1)	x_y_display=0; 	break ;
-		case 'y' : y_z_display++ ;	if(y_z_display > 1)	y_z_display=0;	break ;
-		case 'z' : x_z_display++ ;	if(x_z_display > 1)	x_z_display=0;	break ;
-		case 'j' : if(jawRotation < 20)	jawRotation++ ;			break ;
-		case 'J' : if(jawRotation > 0)	jawRotation-- ;			break ;
-		case 'k' : if(kneeRotation < 45)	kneeRotation++ ;	break ;
-		case 'K' : if(kneeRotation > 0)		kneeRotation-- ;	break ;
-		case 'h' : if(neckTilt < 45)	neckTilt++ ;			break ;
-		case 'H' : if(neckTilt > 0)	neckTilt-- ;			break ;
-		case '/' : if(scene == 14) scene = 0; else scene++; break;
-		default :		break ;
+		//Break when Escape
+		case 27  : 	printf("Quit program.") ;	exit(0) ;
+		//Define scene to display
+		case 's' : 	printf("Drew Model.\n") ;		scene = 0 ;	break ;
+		case 'e' : 	printf("Drew E.\n") ;			scene = 1 ;	break ;
+		case 'c' : 	printf("Drew C.\n") ;			scene = 2 ;	break ;
+		case 'b' : 	printf("Drew B.\n") ;			scene = 3 ;	break ;
+		case 'm' : 	printf("Drew M.\n") ;			scene = 4 ;	break ;
+		case 'n' : 	printf("Drew N.\n") ;			scene = 5 ;	break ;
+		case 'f' : 	printf("Drew F.\n") ;			scene = 6 ;	break ;
+		case 'i' : 	printf("Drew all initials.\n") ;	scene = 7 ;	break ;
+		case '/' : 	printf("Drew next scene.\n") ;		scene++ ;
+						if(scene > 13)		scene = 0 ;	break ;
+		//Show origin for initials
+		case 'o' : 	printf("Showing origin of initials.\n") ;
+				origin++ ;	if(origin > 1)	origin = 0 ;		break ;
+		//Define background options
+		case 'a' : 	printf("Changed background.\n") ;
+				back++ ;	if(back > 1)		back = 0 ;	break ;
+		case 'l' :	printf("Draw transparent polygons.\n") ;
+			 	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE) ;		break ;
+		case 'L' :	printf("Draw filled polygons.\n") ;
+			 	glPolygonMode(GL_FRONT_AND_BACK,GL_FILL) ;		break ;
+		case 'x' : 	printf("Draw (x,y) axes.\n") ;
+				x_y_display++ ;	if(x_y_display > 1)	x_y_display=0; 	break ;
+		case 'y' : 	printf("Draw (y,z) axes.\n") ;
+				y_z_display++ ;	if(y_z_display > 1)	y_z_display=0;	break ;
+		case 'z' : 	printf("Draw (x,z) axes.\n") ;
+				x_z_display++ ;	if(x_z_display > 1)	x_z_display=0;	break ;
+		//Controled mouvements
+		case 'j' : 	printf("Open jaw.\n") ;
+				if(jawRotation < 20)		jawRotation++ ;		break ;
+		case 'J' : 	printf("Close jaw.\n") ;
+				if(jawRotation > 0)		jawRotation-- ;		break ;
+		case 'k' : 	printf("Jump up.\n") ;
+				if(kneeRotation < 45)		kneeRotation++ ;	break ;
+		case 'K' : 	printf("Fall down.\n") ;
+				if(kneeRotation > 0)		kneeRotation-- ;	break ;
+		case 'h' : 	printf("Bend neck.\n") ;
+				if(neckTilt < 45)		neckTilt++ ;		break ;
+		case 'H' : 	printf("Straigthen neck.\n") ;
+				if(neckTilt > 0)		neckTilt-- ;		break ;
+		//Play scene mouvement
+		case 'p' :	printf("Starting mouvement.\n") ;
+				glutKeyboardFunc(NULL) ;
+				glutIdleFunc(idlePlayCallback) ;
+				play = 0 ;						break ;
+		default :								break ;
 	}
 
-	printf("Scene: %d", scene);
-	
-	//printf("Knee Rotation : %d\tJaw Rotation: %d \n", kneeRotation, jawRotation);
+	//Further infotmation
+	printf("Knee Rotation :\t%d\nJaw Rotation:\t%d\nNeck Tilt :\t%d\n\n",kneeRotation,jawRotation,neckTilt) ;
 
 	//Ask for redisplay
 	glutPostRedisplay() ;
@@ -237,8 +264,55 @@ void idleCallback()
 {
 	//Define tail flick angle
 	for(int i = 6; i >= 0; i--) tailFlick[i+1] = tailFlick[i] ;
-	tailFlick[0] = 45*cos(2*PI*counter/50) ;
-	counter++ ; counter%=50 ;
+	tailFlick[0] = 45*sin(2*PI*counterTail/50) ;
+	counterTail++ ; counterTail %= 50 ;
+
+	//Ask for redisplay
+	glutPostRedisplay() ;
+}
+
+//------------------------------------------------------------------------------------------------------------ idle callback function
+void idlePlayCallback()
+{
+	//Setting back to zero
+	switch (play)
+	{
+		case 0 :
+			if(kneeRotation > 0)	kneeRotation-- ;
+			if(neckTilt > 0)	neckTilt-- ;
+			if(jawRotation > 0) 	jawRotation-- ;
+			if(kneeRotation == 0 & neckTilt == 0 & jawRotation == 0)	play++ ;
+			break ;
+		case 1 :
+			if(kneeRotation < 20)	kneeRotation++ ;
+			if(neckTilt < 30)	neckTilt++ ;
+			if(jawRotation < 20) 	jawRotation += 2 ;
+			if(kneeRotation == 20 & neckTilt == 30 & jawRotation == 20)	play++ ;
+			break ;
+		case 2 :
+			if(jawRotation > 0)	jawRotation -= 2 ;
+			else play++ ;
+			break ;
+		case 3 :
+			if(neckTilt > 0)			neckTilt-- ;
+			if(kneeRotation > 0 & neckTilt < 11)	kneeRotation-- ;
+			if(kneeRotation == 0 & neckTilt == 0)				play++ ;
+			break ;
+		case 4 :
+			if(counterJaw < 100)	{	counterJaw++ ;	jawRotation = 10 - (int)(10*cos(2*PI*counterJaw/20)) ;	}
+			else	{	counterJaw = 0 ;	play++ ;	}
+			break ;
+		case 5 :
+			glutKeyboardFunc(keyboardCallback) ;
+			glutIdleFunc(idleCallback) ;
+			break ;
+		default : 	break ;
+	}
+
+	//Define tail flick angle
+	for(int i = 6; i >= 0; i--) tailFlick[i+1] = tailFlick[i] ;
+	tailFlick[0] = 45*sin(2*PI*counterTail/50) ;
+	counterTail++ ; counterTail %= 50 ;
 
 	//Ask for redisplay
 	glutPostRedisplay() ;
@@ -247,8 +321,6 @@ void idleCallback()
 //--------------------------------------------------------------------------------------------------------- display callback function
 void displayCallback()
 {
-	
-
 	//Set Drawing Mode
 	glMatrixMode(GL_MODELVIEW) ;
 	glLoadIdentity() ;
