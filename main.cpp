@@ -156,6 +156,26 @@ void reshapeCallback(int w, int h)
 	glMatrixMode(GL_MODELVIEW) ;
 }
 
+void keyAssignments() {
+		printf("b	-	Draw B \n");
+		printf("c	-	Draw C \n");
+		printf("e	-	Draw E \n");
+		printf("f	-	Draw F \n");
+		printf("h/H	-	Increase/decrease neck rotation\n");
+		printf("i	-	Draw all initials model \n");
+		printf("j/J	-	Open/Close jaw \n");
+		printf("k/K	-	Increase/decrease knee rotation\n");
+		printf("L/l	-	Toggle wireframe \n");
+		printf("m	-	Draw N \n");
+		printf("o	-	Draw origin of initial. \n");
+		printf("p	-	Play animation. \n");
+		printf("s	-	Draw full model \n");
+		printf("x	-	Draw x-axis \n");
+		printf("y	-	Draw x-axis \n");
+		printf("z	-	Draw x-axis \n");
+		printf("/	-	Draw x-axis \n");
+}
+
 //-------------------------------------------------------------------------------------------------------- keyboard callback function
 void keyboardCallback(unsigned char key, int x, int y)
 {
@@ -165,6 +185,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 	//Read key touch
 	switch (key)
 	{
+
 		//Break when Escape
 		case 27  : 	printf("Quit program.") ;	exit(0) ;
 		//Define scene to display
@@ -369,6 +390,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(displayCallback) ;
 	glutReshapeFunc(reshapeCallback) ;
 
+	keyAssignments();
 	//Start glut loop
 	glutMainLoop() ;
 	return(0) ;
