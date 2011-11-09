@@ -198,7 +198,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 		case 'f' : 	printf("Drew F.\n") ;			scene = 6 ;	break ;
 		case 'i' : 	printf("Drew all initials.\n") ;	scene = 7 ;	break ;
 		case '/' : 	printf("Drew next scene.\n") ;		scene++ ;
-						if(scene > 13)		scene = 0 ;	break ;
+						if(scene > 15)		scene = 0 ;	break ;
 		//Show origin for initials
 		case 'o' : 	printf("Showing origin of initials.\n") ;
 				origin++ ;	if(origin > 1)	origin = 0 ;		break ;

@@ -23,3 +23,4 @@ void drawNeckAndHead (int kneeRotation, int neckTilt, int jawRotation) ;
 void drawTail (int kneeRotation, float* tailFlick) ;
 void drawBody (int kneeRotation, float* tailFlick, int neckTilt, int jawRotation) ;
 void drawFrontLegsAndBody (int kneeRotation, float* tailFlick, int neckTilt, int jawRotation) ;
+void drawRearLegsAndBody (int kneeRotation, float* tailFlick, int neckTilt, int jawRotation) ;

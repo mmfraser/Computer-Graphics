@@ -119,8 +119,10 @@ void defineAndDrawScene (int scene, int origin, int kneeRotation, float* tailFli
 		case 9 : drawTopOfHeadAndNose(jawRotation) ;						break ;
 		case 10 : drawNeckAndHead(kneeRotation, neckTilt, jawRotation) ;			break ;
 		case 11 : drawTail(kneeRotation, tailFlick) ;						break ;
-		case 12 : drawBody (kneeRotation, tailFlick, neckTilt, jawRotation) 	;		break ;
-		case 13 : drawFrontLegsAndBody (kneeRotation, tailFlick, neckTilt, jawRotation) ;	break ;
-		default :										break ;
+		case 12 : drawBody(kneeRotation, tailFlick, neckTilt, jawRotation) 	;		break ;
+		case 13 : drawFrontLegsAndBody(kneeRotation, tailFlick, neckTilt, jawRotation) ;	break ;
+		case 14 : drawRearLegsAndBody(kneeRotation, tailFlick, neckTilt, jawRotation) ;	break ;
+		case 15 : drawScene(kneeRotation, tailFlick, neckTilt, jawRotation) ;	break ;
+		default : break ;
 	}
 }
