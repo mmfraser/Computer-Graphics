@@ -378,7 +378,7 @@ int main(int argc, char** argv)
 	glutInit(&argc,argv) ;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH) ;
 	glutInitWindowSize(height,width) ;
-	glutCreateWindow("Computer Graphics project : first view of initials") ;
+	glutCreateWindow("Computer Graphics project : Animated Model") ;
 	glEnable(GL_DEPTH_TEST) ;
 	glClearColor(0.f,0.f,0.f,1.f) ;
 
@@ -390,7 +390,9 @@ int main(int argc, char** argv)
 	glutDisplayFunc(displayCallback) ;
 	glutReshapeFunc(reshapeCallback) ;
 
-	keyAssignments();
+	//Display user manuel
+	keyAssignments() ;
+
 	//Start glut loop
 	glutMainLoop() ;
 	return(0) ;
