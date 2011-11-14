@@ -20,6 +20,8 @@
 //-------------------------------------------------------------------------------------------------------------------- default angles
 float tailAngles[7] = {20.f,15.f,0.f,0.f,0.f,0.f,0.f} ;
 float neckAngles[5] = {-15.f,10.f,0.f,0.f,0.f} ;
+int noNeckParts = 5;
+int noNeckPartsDrawn = 0;
 
 //----------------------------------------------------------------------------------------------------------------------------- width
 float neckWidth[5] = {3.75,3.5,3.25,3.f,2.75} ;
@@ -154,6 +156,20 @@ void drawHead(int neckTilt, int jawRotation)
 	glPopMatrix();
 }
 
+void drawNeckPart(int neckTilt, int neckPart) {
+	int tempNeckAngles[5] = {neckTilt,-neckTilt,-neckTilt,-neckTilt,0} ;
+	glRotatef(neckAngles[neckPart]+tempNeckAngles[neckPart],0.f,0.f,1.f) ;	glPushMatrix() ;
+	glScalef(1.25/1.5,0.5,neckWidth[neckPart]) ;	drawM(0) ;	glPopMatrix() ;
+	glTranslatef(0.f,0.2,0.f) ;
+	noNeckPartsDrawn++;
+
+	if(noNeckParts == noNeckPartsDrawn) {
+		noNeckPartsDrawn = 0;
+		return;
+	} else
+		drawNeckPart(neckTilt, neckPart++);
+}
+
 //---------------------------------------------------------------- draw neck and head function
 void drawNeckAndHead (int kneeRotation, int neckTilt, int jawRotation)
 {
@@ -169,13 +185,10 @@ void drawNeckAndHead (int kneeRotation, int neckTilt, int jawRotation)
 
 	//Transformations for trunc of neck
 	glTranslatef(0.1625,0.175,0.f) ;	glRotatef(180.f,0.f,1.f,0.f) ;	glRotatef(25.f,0.f,0.f,1.f) ;
-	for(int i = 0; i < 5; i++)
-	{
-		glRotatef(neckAngles[i]+tempNeckAngles[i],0.f,0.f,1.f) ;	glPushMatrix() ;
-		glScalef(1.25/1.5,0.5,neckWidth[i]) ;	drawM(0) ;	glPopMatrix() ;
-		glTranslatef(0.f,0.2,0.f) ;
-	}
 
+	// Draws the neck, recursivel so it is jointed.
+	drawNeckPart(neckTilt, 1);
+	
 	//Draw head
 	drawHead(neckTilt,jawRotation) ;
 

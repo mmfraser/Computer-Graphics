@@ -57,7 +57,7 @@ int stepDraw = 0 ;
 int play = 0 ;
 
 //------------------------------------------------------------------------------------------------------------ model motion variables
-int jawRotation = 0, kneeRotation = 0, neckTilt = 0 ;
+int jawRotation = 0, kneeRotation = 0, neckTilt = 15 ;
 int counterTail = 0 ;
 int counterJaw = 0 ;
 float tailFlick[8] = {	0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f	} ;
@@ -227,7 +227,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 		case 'h' : 	printf("Bend neck.\n") ;
 				if(neckTilt < 45)		neckTilt++ ;		break ;
 		case 'H' : 	printf("Straigthen neck.\n") ;
-				if(neckTilt > 0)		neckTilt-- ;		break ;
+				if(neckTilt > 15)		neckTilt-- ;		break ;
 		//Play scene mouvement
 		case 'p' :	printf("Starting mouvement.\n") ;
 				glutKeyboardFunc(NULL) ;
@@ -300,24 +300,24 @@ void idlePlayCallback()
 	{
 		case 0 :
 			if(kneeRotation > 0)	kneeRotation-- ;
-			if(neckTilt > 0)	neckTilt-- ;
+			if(neckTilt > 15)	neckTilt-- ;
 			if(jawRotation > 0) 	jawRotation-- ;
-			if(kneeRotation == 0 & neckTilt == 0 & jawRotation == 0)	play++ ;
+			if(kneeRotation == 0 & neckTilt == 15 & jawRotation == 0)	play++ ;
 			break ;
 		case 1 :
-			if(kneeRotation < 20)	kneeRotation++ ;
-			if(neckTilt < 30)	neckTilt++ ;
+			if(kneeRotation < 25)	kneeRotation++ ;
+			if(neckTilt < 20)	neckTilt++ ;
 			if(jawRotation < 20) 	jawRotation += 2 ;
-			if(kneeRotation == 20 & neckTilt == 30 & jawRotation == 20)	play++ ;
+			if(kneeRotation == 20 & neckTilt == 20 & jawRotation == 20)	play++ ;
 			break ;
 		case 2 :
 			if(jawRotation > 0)	jawRotation -= 2 ;
 			else play++ ;
 			break ;
 		case 3 :
-			if(neckTilt > 0)			neckTilt-- ;
-			if(kneeRotation > 0 & neckTilt < 11)	kneeRotation-- ;
-			if(kneeRotation == 0 & neckTilt == 0)				play++ ;
+			if(neckTilt > 15)			neckTilt-- ;
+			if(kneeRotation > 0 & neckTilt < 17)	kneeRotation-- ;
+			if(kneeRotation == 0 & neckTilt == 15)				play++ ;
 			break ;
 		case 4 :
 			if(counterJaw < 100)	{	counterJaw++ ;	jawRotation = 10 - (int)(10*cos(2*PI*counterJaw/20)) ;	}
