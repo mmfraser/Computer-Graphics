@@ -263,7 +263,7 @@ void drawModel (int kneeRotation, float* tailFlick, int neckTilt, int jawRotatio
 	glPushMatrix() ;
 
 	//Transformations and rear legs and body
-	glTranslatef(0.f,0.4,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawRearLegsAndBody(kneeRotation,tailFlick,neckTilt,jawRotation) ;
+	glTranslatef(0.2,0.4,0.f) ;	/*glRotatef(,,,) ;*/	/*glScalef(,,)*/	drawRearLegsAndBody(kneeRotation,tailFlick,neckTilt,jawRotation) ;
 
 	//Pop Matrix from function call
 	glPopMatrix() ;
