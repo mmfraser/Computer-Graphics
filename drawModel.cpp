@@ -186,7 +186,7 @@ void drawNeckAndHead (int kneeRotation, int neckTilt, int jawRotation)
 	//Transformations for trunc of neck
 	glTranslatef(0.1625,0.175,0.f) ;	glRotatef(180.f,0.f,1.f,0.f) ;	glRotatef(25.f,0.f,0.f,1.f) ;
 
-	// Draws the neck, recursivel so it is jointed.
+	// Draws the neck, recursively so it is jointed.
 	drawNeckPart(neckTilt, 1);
 	
 	//Draw head
