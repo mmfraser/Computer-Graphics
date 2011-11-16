@@ -187,7 +187,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 	{
 
 		//Break when Escape
-		case 27  : 	printf("Quit program.") ;	exit(0) ;
+		case 27  : 	printf("Quit program.\n") ;	exit(0) ;
 		//Define scene to display
 		case 's' : 	printf("Drew Model.\n") ;		scene = 0 ;	break ;
 		case 'e' : 	printf("Drew E.\n") ;			scene = 1 ;	break ;
